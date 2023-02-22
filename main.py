@@ -2,6 +2,8 @@ import discord
 import logging
 
 
+# This is amazing documentation skillz
+
 class MyClient(discord.Client):
     # Retrieve the logging object for the client.
     logger = logging.getLogger('discord.client')

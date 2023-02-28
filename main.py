@@ -1,10 +1,10 @@
 import discord
 import logging
 
+from discord.ext import commands
 
-# This is amazing documentation skillz
 
-class MyClient(discord.Client):
+class MyClient(commands.Bot):
     # Retrieve the logging object for the client.
     logger = logging.getLogger('discord.client')
 

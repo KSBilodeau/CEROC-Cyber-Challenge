@@ -1,6 +1,6 @@
 import discord
 import logging
-import discord.ext from commands
+from discord.ext import commands
 
 class MyClient(discord.Bot):
     # Retrieve the logging object for the client.

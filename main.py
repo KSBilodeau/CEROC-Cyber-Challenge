@@ -2,6 +2,7 @@ import discord
 import logging
 from discord.ext import commands
 
+
 class MyClient(discord.Bot):
     # Retrieve the logging object for the client.
     logger = logging.getLogger('discord.client')

@@ -29,6 +29,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 # Construct an instance of the Client with the given intents.
-client = MyClient(intents=intents)
+client = MyClient(intents=intents, command_prefix="nibble ")
+
 # Request console input for the bot token and pass it to the client for it to initialize
 client.run(input('Enter a bot token: '))

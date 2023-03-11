@@ -6,7 +6,7 @@ from discord.ext import commands
 
 class MyBot(commands.Bot):
     # Retrieve the logging object for the client.
-    logger = logging.getLogger('discord.Bot')
+    logger = logging.getLogger('discord.bot')
 
     async def on_ready(self):
         # Note the bot successfully logged in and is ready to work.

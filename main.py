@@ -4,9 +4,9 @@ import logging
 from discord.ext import commands
 
 
-class MyClient(commands.Bot):
+class MyBot(commands.Bot):
     # Retrieve the logging object for the client.
-    logger = logging.getLogger('discord.client')
+    logger = logging.getLogger('discord.Bot')
 
     async def on_ready(self):
         # Note the bot successfully logged in and is ready to work.
@@ -29,6 +29,6 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 # Construct an instance of the Client with the given intents.
-client = MyClient(intents=intents)
+bot = MyBot(intents=intents, command_prefix="nibble ")
 # Request console input for the bot token and pass it to the client for it to initialize
-client.run(input('Enter a bot token: '))
+bot.run(input('Enter a bot token: '))

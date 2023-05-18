@@ -10,27 +10,28 @@ class MyBot(commands.Bot):
     # Retrieve the logging object for the client.
     logger = logging.getLogger('discord.bot')
 
-    async def on_ready(self):
-        # Load the extension
+    async def setup_hook(self):
+        # Load the command extension/s before the bot starts
         await self.load_extension('challenge')
 
+    async def on_ready(self):
         # Note the bot successfully logged in and is ready to work.
         self.logger.info(f'Logged is as {self.user}!')
 
 
-# Retrieve the service account key JSON file contents and fetch the database credentials
+# Fetch the database credentials using the user provided Firebase Service Account Key JSON file
 cred = credentials.Certificate(input("Enter Service Account Key Path: "))
 
-# Initialize the app with the service credentials, establishing admin access
+# Initialize the app with the user provided service credentials, establishing admin access
 firebase_admin.initialize_app(cred, {
     'databaseURL': input("Enter Database URL: ")
 })
 
-# Create an intents object and enable the MSG_CONTENT intent for the on_message event
+# Set the bot to utilize default permissions necessary for the library to function
 intents = discord.Intents.default()
-intents.message_content = True
 
 # Construct an instance of the Client with the given intents.
 bot = MyBot(intents=intents, command_prefix="nibble ")
-# Request console input for the bot token and pass it to the client for it to initialize
+
+# Initialize the bot with the user provided token
 bot.run(input('Enter a bot token: '))

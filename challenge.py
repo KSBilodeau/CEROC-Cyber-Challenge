@@ -3,12 +3,18 @@ import logging
 
 from discord import app_commands
 from discord.ext import commands
+from firebase_admin import db
 
 logger = logging.getLogger("discord.challenge")
 
 
 class Challenge(commands.Cog):
+    # Store a reference to the command group to connect the extension commands all together
     group = app_commands.Group(name="challenge", description="Manage active challenges and your submissions.")
+
+    # Retrieve and store references to the top level database objects
+    users: db.Reference = db.reference("users")
+    challenges: db.Reference = db.reference("challenges")
 
     @group.command()
     async def search(self, interaction: discord.Interaction, query: str):
@@ -48,5 +54,5 @@ async def setup(bot: commands.Bot):
     logger.info("Extension loaded successfully!")
 
 
-async def teardown(bot):
+async def teardown(bot: commands.Bot):
     logger.info("Extension unloaded successfully!")

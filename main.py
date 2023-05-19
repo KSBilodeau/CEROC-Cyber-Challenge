@@ -31,7 +31,7 @@ firebase_admin.initialize_app(cred, {
 intents = discord.Intents.default()
 
 # Construct an instance of the Client with the given intents.
-bot = MyBot(intents=intents, command_prefix="nibble ")
+bot = MyBot(intents=intents, command_prefix=[])
 
 # Initialize the bot with the user provided token
 bot.run(input('Enter a bot token: '))

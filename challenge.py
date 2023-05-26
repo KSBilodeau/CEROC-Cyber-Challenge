@@ -4,7 +4,6 @@ import logging
 from discord import app_commands
 from discord.ext import commands
 from firebase_admin import db
-from modals import AddChallengeModal
 
 logger = logging.getLogger("discord.challenge")
 
@@ -16,60 +15,42 @@ class Challenge(commands.Cog):
 
     @group.command()
     async def search(self, interaction: discord.Interaction, query: str):
+        # Necessary for all commands, ensures the message is only available to the user
         await interaction.response.defer(ephemeral=True)
+        # Dummy embed created as a starting point and test
         embed = discord.Embed(title="Challenge Search", color=0x4e5d94, description=f'Your query was "{query}"!')
-
-        challenge_dict = self.challenges.get()
-        if isinstance(challenge_dict, dict):
-            for key, value in challenge_dict.items():
-                if query.lower() in value["name"].lower() and query.lower() in value["content"].lower():
-                    embed.add_field(name=(value["name"] + " [" + key + "]"), value=(value["content"][0:125] + "…"))
-
-        if len(embed.fields) == 0:
-            embed.add_field(name="Error", value="No results were found for your query!")
-
+        # Necessary to complete an interaction, as it sends the embed
         await interaction.followup.send(embed=embed)
 
     @group.command()
     async def list(self, interaction: discord.Interaction):
+        # Necessary for all commands, ensures the message is only available to the user
         await interaction.response.defer(ephemeral=True)
+        # Dummy embed created as a starting point and test
         embed = discord.Embed(title="Challenge List", color=0x4e5d94)
-
-        challenges_dict = self.challenges.get()
-        if isinstance(challenges_dict, dict):
-            for key, value in challenges_dict.items():
-                embed.add_field(name=(value["name"] + " [" + key + "]"), value=(value["content"][0:125] + "…"))
-
-        if len(embed.fields) == 0:
-            embed.description = "No challenges are currently available!"
-
+        # Necessary to complete an interaction, as it sends the embed
         await interaction.followup.send(embed=embed)
 
     @group.command()
-    async def submit(self, interaction: discord.Interaction, challenge_id: int, string: str = None,
-                     number: int = None, file: discord.Attachment = None):
+    async def submit(self, interaction: discord.Interaction, challenge_id: int, flag: str):
+        # Necessary for all commands, ensures the message is only available to the user
         await interaction.response.defer(ephemeral=True)
-        message = f'Receipt of submission for Challenge #{int(challenge_id)}:\n```'
-
-        if string is not None:
-            message += f'Str Flag:\n\t"{string}"\n'
-
-        if number is not None:
-            message += f'Num Flag:\n\t{int(number)}\n'
-
-        if file is not None:
-            message += "File Flag:\n"
-            message += f'\tName: {file.filename}\n'
-            message += f'\tSize: {file.size}\n'
-            message += f'\tDesc: "{file.description}"\n'
-
-        message += "```"
-
-        await interaction.followup.send(message)
+        # Not all followups are embeds!  You can also send strings.
+        await interaction.followup.send(f'You submitted:\nChallenge ID: {challenge_id}\nChallenge Flag: {flag}')
 
     @group.command()
     async def add(self, interaction: discord.Interaction):
-        await interaction.response.send_modal(AddChallengeModal())
+        # This function should be sending a modal, but for the sake of the skeleton, it'll defer
+        await interaction.response.defer(ephemeral=True)
+        # Dummy response as this function would normally send a modal
+        await interaction.followup.send("THIS IS A TEST")
+
+    @group.command()
+    async def end(self, interaction: discord.Interaction, challenge_id: int):
+        # Necessary for all commands, ensures the message is only available to the user
+        await interaction.response.defer(ephemeral=True)
+        # Not all followups are embeds!  You can also send strings.
+        await interaction.followup.send(f'You have asked to end Challenge #{challenge_id}')
 
 
 async def setup(bot: commands.Bot):

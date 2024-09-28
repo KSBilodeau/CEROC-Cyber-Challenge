@@ -11,14 +11,30 @@ This bot is a managerial and activity bot that seeks to
 provide access to and management of Cyber Challenges, which 
 seek to improve programmer's abilities in cybersecurity.
 
+## Tasks
+
+- [x] Create a bot under Discord's Team API 
+- [ ] Create a database to store persistent bot data
+  - [x] Create a standard for challenge objects
+  - [ ] Create a standard for user objects
+- [ ] Populate the database with existing challenges
+- [x] Create all commands through the API (tentative, subject to change)
+- [ ] Add backends to all commands
+  - [ ] Add
+  - [ ] End
+  - [ ] Search
+  - [ ] List
+  - [ ] Submit
+  - [ ] Leaderboard
+
 ## How do I help?
 
-To contribute, create a fork of the project and clone it locally.
-Then, run the following commands:
+As contributors, you do not need to fork the project to contribute! Instead,
+simply just clone the repo and run the following commands:
 
 ```bash
-virtualenv .env \
-  && source .env/bin/activate \
+virtualenv venv \
+  && source venv/bin/activate \
   && pip install -r requirements.txt
 ```
 
@@ -30,8 +46,14 @@ begin to make your local edits and commits.
 Ensure that your commit does not introduce foreign files
 that have not already been authorized to be introduced
 into the repo.  The provided `.gitignore` is there to
-help assist in that endeavor.In general, most PRs 
+help assist in that endeavor.  In general, most PRs 
 should leave the actual file structure as it is currently.
+
+### Bot Tokens and Database Access
+
+Contact `secretsrequest@cerocchallengeteam.xyz`with your known user details 
+and the team administrator will send you a message containing a one-time use link
+with the necessary secrets needed for development.
 
 ## Style Guidelines
 
@@ -40,8 +62,8 @@ development on this project:
 
 ### Commit Guidelines
 
-This project uses the NIST Commit Styleguide, [which can be
-found here](https://pages.nist.gov/dioptra/dev-guide/contributing-commit-styleguide.html).
+This project uses the Conventional Commits Styleguide, [which a quick summary and 
+full spec can be found here](https://www.conventionalcommits.org/en/v1.0.0/#summary).
 The purpose of using a style guide for commits is to ensure
 the overall quality and consistency of edits is maintained
 across all maintainers and environments.
@@ -49,8 +71,8 @@ across all maintainers and environments.
 ### Code Guidelines
 
 This project uses the Python PEP8 Styleguide, [which can be
-found here](https://peps.python.org/pep-0008/).  These guidelines are highly opinionated
-and will ensure the most consistent and well-formed code
+found here](https://peps.python.org/pep-0008/).  These guidelines are highly 
+opinionated and will ensure the most consistent and well-formed code
 across all environments.  PyCharm Professional Edition
 utilizes a PEP8 linter that should ensure code written 
 remains compliant.

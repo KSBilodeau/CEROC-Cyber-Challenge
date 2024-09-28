@@ -3,15 +3,12 @@ import logging
 
 from discord import app_commands
 from discord.ext import commands
-from firebase_admin import db
 
 logger = logging.getLogger("discord.challenge")
 
 
 class Challenge(commands.Cog):
     group = app_commands.Group(name="challenge", description="Manage active challenges and your submissions.")
-    users = db.reference("users")
-    challenges: db.Reference = db.reference("challenges")
 
     @group.command()
     async def search(self, interaction: discord.Interaction, query: str):

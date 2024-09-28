@@ -1,10 +1,7 @@
 import discord
-import firebase_admin
 import logging
 
 from discord.ext import commands
-from firebase_admin import credentials
-
 
 class MyBot(commands.Bot):
     # Retrieve the logging object for the client.
@@ -18,14 +15,6 @@ class MyBot(commands.Bot):
         # Note the bot successfully logged in and is ready to work.
         self.logger.info(f'Logged is as {self.user}!')
 
-
-# Fetch the service account key JSON file contents
-cred = credentials.Certificate(input("Enter Service Account Key Path: "))
-
-# Initialize the app with a service account, granting admin privileges
-firebase_admin.initialize_app(cred, {
-    'databaseURL': input("Enter Database URL: ")
-})
 
 # Create an intents object and enable the MSG_CONTENT intent for the on_message event
 intents = discord.Intents.default()
